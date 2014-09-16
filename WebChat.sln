@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{143C31
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChat.Models", "WebChat.Models\WebChat.Models.csproj", "{A0BEA21F-B3CF-497C-9C55-5059DA3A491D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChat.Data", "WebChat.Data\WebChat.Data.csproj", "{97F3C82F-7CC8-44E6-A3BF-6B03D3662819}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +26,14 @@ Global
 		{FEBF5E98-1979-43D7-88CE-D3184010FA6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEBF5E98-1979-43D7-88CE-D3184010FA6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEBF5E98-1979-43D7-88CE-D3184010FA6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0BEA21F-B3CF-497C-9C55-5059DA3A491D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0BEA21F-B3CF-497C-9C55-5059DA3A491D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0BEA21F-B3CF-497C-9C55-5059DA3A491D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0BEA21F-B3CF-497C-9C55-5059DA3A491D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F3C82F-7CC8-44E6-A3BF-6B03D3662819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F3C82F-7CC8-44E6-A3BF-6B03D3662819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F3C82F-7CC8-44E6-A3BF-6B03D3662819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F3C82F-7CC8-44E6-A3BF-6B03D3662819}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

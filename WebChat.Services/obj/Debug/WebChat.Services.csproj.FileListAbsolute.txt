@@ -99,3 +99,7 @@ D:\Projects\Web Services and Cloud\WebChat\WebChat.Services\bin\zh-Hant\Microsof
 D:\Projects\Web Services and Cloud\WebChat\WebChat.Services\bin\System.Web.Cors.dll
 D:\Projects\Web Services and Cloud\WebChat\WebChat.Services\bin\System.Web.Http.Cors.dll
 D:\Projects\Web Services and Cloud\WebChat\WebChat.Services\bin\System.Web.Http.Cors.xml
+D:\Projects\Web Services and Cloud\WebChat\WebChat.Services\bin\WebChat.Data.dll
+D:\Projects\Web Services and Cloud\WebChat\WebChat.Services\bin\WebChat.Models.dll
+D:\Projects\Web Services and Cloud\WebChat\WebChat.Services\bin\WebChat.Data.pdb
+D:\Projects\Web Services and Cloud\WebChat\WebChat.Services\bin\WebChat.Models.pdb

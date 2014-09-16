@@ -16,6 +16,7 @@
     using Microsoft.Owin.Security.Cookies;
     using Microsoft.Owin.Security.OAuth;
 
+    using WebChat.Models;
     using WebChat.Services.Models;
     using WebChat.Services.Providers;
     using WebChat.Services.Results;
@@ -263,7 +264,7 @@
                 return new ChallengeResult(provider, this);
             }
 
-            ApplicationUser user =
+            User user =
                 await
                 this.UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
 
@@ -351,7 +352,7 @@
                 return this.BadRequest(this.ModelState);
             }
 
-            ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            User user = new User { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await this.UserManager.CreateAsync(user, model.Password);
 
@@ -380,7 +381,7 @@
                 return this.InternalServerError();
             }
 
-            ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            User user = new User { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await this.UserManager.CreateAsync(user);
             if (!result.Succeeded)

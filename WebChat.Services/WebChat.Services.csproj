@@ -227,7 +227,6 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -289,7 +288,16 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\WebChat.Data\WebChat.Data.csproj">
+      <Project>{97F3C82F-7CC8-44E6-A3BF-6B03D3662819}</Project>
+      <Name>WebChat.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebChat.Models\WebChat.Models.csproj">
+      <Project>{A0BEA21F-B3CF-497C-9C55-5059DA3A491D}</Project>
+      <Name>WebChat.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
