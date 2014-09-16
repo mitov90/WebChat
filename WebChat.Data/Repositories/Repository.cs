@@ -1,14 +1,17 @@
 ﻿namespace WebChat.Data.Repositories
 {
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
     using System.Linq;
 
-    public class EFRepository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T>
+        where T : class
     {
-        private DbContext context;
-        private IDbSet<T> set;
+        private readonly DbContext context;
 
-        public EFRepository(DbContext context)
+        private readonly IDbSet<T> set;
+
+        public Repository(DbContext context)
         {
             this.context = context;
             this.set = context.Set<T>();
@@ -42,7 +45,7 @@
 
         public T Delete(object id)
         {
-            var entity = this.Find(id);
+            T entity = this.Find(id);
             this.Delete(entity);
             return entity;
         }
@@ -54,7 +57,7 @@
 
         private void ChangeState(T entity, EntityState state)
         {
-            var entry = this.context.Entry(entity);
+            DbEntityEntry<T> entry = this.context.Entry(entity);
             if (entry.State == EntityState.Detached)
             {
                 this.set.Attach(entity);

@@ -15,17 +15,22 @@
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<WebChatDbContext, Configuration>());
         }
 
-        public static WebChatDbContext Create()
-        {
-            return new WebChatDbContext();
-        }
-
         public IDbSet<File> Files { get; set; }
 
         public IDbSet<Interest> Interests { get; set; }
 
         public IDbSet<Message> Messages { get; set; }
 
-        //public IDbSet<User> Users { get; set; }
+        public static WebChatDbContext Create()
+        {
+            return new WebChatDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+        }
     }
 }

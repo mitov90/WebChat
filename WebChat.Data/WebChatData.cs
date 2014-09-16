@@ -2,15 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
 
     using WebChat.Data.Repositories;
     using WebChat.Models;
 
     public class WebChatData
     {
-        private WebChatDbContext context;
-        private IDictionary<Type, object> repositories;
+        private readonly WebChatDbContext context;
+
+        private readonly IDictionary<Type, object> repositories;
 
         public WebChatData(WebChatDbContext context)
         {
@@ -57,10 +57,10 @@
 
         private IRepository<T> GetRepository<T>() where T : class
         {
-            var typeOfRepository = typeof(T);
+            Type typeOfRepository = typeof(T);
             if (!this.repositories.ContainsKey(typeOfRepository))
             {
-                var newRepository = Activator.CreateInstance(typeof(EFRepository<T>), context);
+                object newRepository = Activator.CreateInstance(typeof(Repository<T>), this.context);
                 this.repositories.Add(typeOfRepository, newRepository);
             }
 
