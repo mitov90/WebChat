@@ -9,30 +9,46 @@
 
     public class WebChatData
     {
-        private DbContext context;
+        private WebChatDbContext context;
         private IDictionary<Type, object> repositories;
 
-        public WebChatData(DbContext context)
+        public WebChatData(WebChatDbContext context)
         {
             this.context = context;
             this.repositories = new Dictionary<Type, object>();
         }
 
-        //public IRepository<User> Users
-        //{
-        //    get
-        //    {
-        //        return this.GetRepository<User>();
-        //    }
-        //}
+        public IRepository<File> Files
+        {
+            get
+            {
+                return this.GetRepository<File>();
+            }
+        }
 
-        //public IRepository<Game> Games
-        //{
-        //    get
-        //    {
-        //        return this.GetRepository<Game>();
-        //    }
-        //}
+        public IRepository<User> Users
+        {
+            get
+            {
+                return this.GetRepository<User>();
+            }
+        }
+
+        public IRepository<Message> Messages
+        {
+            get
+            {
+                return this.GetRepository<Message>();
+            }
+        }
+
+        public IRepository<Interest> Interests
+        {
+            get
+            {
+                return this.GetRepository<Interest>();
+            }
+        }
 
         public int SaveChanges()
         {

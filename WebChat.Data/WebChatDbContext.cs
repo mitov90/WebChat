@@ -19,5 +19,13 @@
         {
             return new WebChatDbContext();
         }
+
+        public IDbSet<File> Files { get; set; }
+
+        public IDbSet<Interest> Interests { get; set; }
+
+        public IDbSet<Message> Messages { get; set; }
+
+        //public IDbSet<User> Users { get; set; }
     }
 }

@@ -4,7 +4,7 @@
 
     using WebChat.Models.Enums;
 
-    internal class File
+    public class File
     {
         public int Id { get; set; }
 
@@ -14,5 +14,9 @@
 
         [Required]
         public string Link { get; set; }
+
+        public int MessageId { get; set; }
+
+        public virtual Message Message { get; set; }
     }
 }
