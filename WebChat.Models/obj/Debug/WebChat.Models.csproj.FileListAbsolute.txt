@@ -12,3 +12,17 @@ D:\Projects\Web Services and Cloud\WebChat\WebChat.Models\bin\Debug\Microsoft.As
 D:\Projects\Web Services and Cloud\WebChat\WebChat.Models\obj\Debug\WebChat.Models.csprojResolveAssemblyReference.cache
 D:\Projects\Web Services and Cloud\WebChat\WebChat.Models\obj\Debug\WebChat.Models.dll
 D:\Projects\Web Services and Cloud\WebChat\WebChat.Models\obj\Debug\WebChat.Models.pdb
+E:\Telerik\TeamWork\WebChat\WebChat.Models\bin\Debug\WebChat.Models.dll.config
+E:\Telerik\TeamWork\WebChat\WebChat.Models\bin\Debug\WebChat.Models.dll
+E:\Telerik\TeamWork\WebChat\WebChat.Models\bin\Debug\WebChat.Models.pdb
+E:\Telerik\TeamWork\WebChat\WebChat.Models\bin\Debug\EntityFramework.dll
+E:\Telerik\TeamWork\WebChat\WebChat.Models\bin\Debug\EntityFramework.SqlServer.dll
+E:\Telerik\TeamWork\WebChat\WebChat.Models\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+E:\Telerik\TeamWork\WebChat\WebChat.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Telerik\TeamWork\WebChat\WebChat.Models\bin\Debug\EntityFramework.xml
+E:\Telerik\TeamWork\WebChat\WebChat.Models\bin\Debug\EntityFramework.SqlServer.xml
+E:\Telerik\TeamWork\WebChat\WebChat.Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+E:\Telerik\TeamWork\WebChat\WebChat.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\Telerik\TeamWork\WebChat\WebChat.Models\obj\Debug\WebChat.Models.csprojResolveAssemblyReference.cache
+E:\Telerik\TeamWork\WebChat\WebChat.Models\obj\Debug\WebChat.Models.dll
+E:\Telerik\TeamWork\WebChat\WebChat.Models\obj\Debug\WebChat.Models.pdb
