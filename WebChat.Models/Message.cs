@@ -13,12 +13,14 @@
 
         public int? FileId { get; set; }
 
-        //[ForeignKey("User")]
-        public Guid ReceiverGuid { get; set; }
+        [ForeignKey("Sender")]
+        public string SenderId { get; set; }
 
-        public virtual User User { get; set; }
+        [ForeignKey("Receiver")]
+        public string ReceiverId { get; set; }
 
-        //[ForeignKey("User")]
-        public Guid UserId { get; set; }
+        public virtual User Sender { get; set; }
+
+        public virtual User Receiver { get; set; }
     }
 }

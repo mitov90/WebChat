@@ -14,9 +14,15 @@
     {
         private ICollection<Interest> interests;
 
+        private ICollection<Message> sentMessages;
+
+        private ICollection<Message> receivedMessages;
+
         public User()
         {
             this.interests = new HashSet<Interest>();
+            this.sentMessages = new HashSet<Message>();
+            this.receivedMessages = new HashSet<Message>();
         }
 
         public byte[] ProfileImage { get; set; }
@@ -43,8 +49,34 @@
             }
         }
 
+        public virtual ICollection<Message> SentMessages
+        {
+            get
+            {
+                return this.sentMessages;
+            }
+
+            set
+            {
+                this.sentMessages = value;
+            }
+        }
+
+        public virtual ICollection<Message> ReceivedMessages
+        {
+            get
+            {
+                return this.receivedMessages;
+            }
+
+            set
+            {
+                this.receivedMessages = value;
+            }
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(
-            UserManager<User> manager, 
+            UserManager<User> manager,
             string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
