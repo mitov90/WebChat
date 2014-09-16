@@ -6,7 +6,7 @@
     using WebChat.Data.Repositories;
     using WebChat.Models;
 
-    public class WebChatData
+    public class WebChatData : IWebChatData
     {
         private readonly WebChatDbContext context;
 

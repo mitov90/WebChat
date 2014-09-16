@@ -6,7 +6,7 @@
     {
         public ActionResult Index()
         {
-            this.ViewBag.Title = "Home Page";
+            this.ViewBag.Title = "WebChat Home Page";
 
             return this.View();
         }

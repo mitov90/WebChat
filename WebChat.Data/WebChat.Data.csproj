@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IWebChatData.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\IRepository.cs" />

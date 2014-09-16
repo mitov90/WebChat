@@ -20,6 +20,7 @@
                                     Age = 10, 
                                     Location = "Plovdiv"
                                 };
+            data.Users.Add(newPesho);
 
             Message newMessage = new Message
                                      {
