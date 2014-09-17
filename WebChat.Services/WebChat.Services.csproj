@@ -243,6 +243,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Helpers\IUserIdProvider.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Global.asax.cs">
