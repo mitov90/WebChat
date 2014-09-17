@@ -68,10 +68,12 @@
         }
 
         // POST api/values
+        [HttpPost]
         public HttpResponseMessage Post()
         {
             HttpResponseMessage result = null;
             var httpRequest = HttpContext.Current.Request;
+            var files = httpRequest.Files;
             if (httpRequest.Files.Count > 0)
             {
                 var docfiles = new List<string>();
@@ -83,12 +85,14 @@
 
                     docfiles.Add(filePath);
                 }
+
                 result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
             }
             else
             {
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
+
             return result;
         }
 

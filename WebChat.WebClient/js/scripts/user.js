@@ -14,9 +14,12 @@
                     'password': password
                 };
 
+                jQuery.support.cors = true;
+
                 $.ajax({
                     type: 'POST',
 //                    dataType: 'json',
+                    crossDomain: true,
                     url: appSettings.websiteUrl + loginUrl,
                     data: input,
                     success: function (data) {
@@ -26,13 +29,14 @@
                         $storage.set('email', data.userName);
                         $storage.set('expires', data.expires);
                         $storage.set('originalLogInResponse', data);
-                        console.log($storage.get('sessionToken'));
+//                        console.log($storage.get('sessionToken'));
+                        success();
                     },
                     async: false
                 });
             };
 
-            var isLogged = function(){
+            var isLogged = function () {
                 if ($storage.isSet('isUserLogged')) {
                     return true;
                 }
@@ -40,8 +44,8 @@
                 return false;
             };
 
-            var sessionToken = function(){
-                if (isLogged()===true && $storage.isSet('sessionToken')) {
+            var sessionToken = function () {
+                if (isLogged() === true && $storage.isSet('sessionToken')) {
                     return $storage.get('sessionToken');
                 }
 
@@ -55,9 +59,12 @@
                     'ConfirmPassword': passwordConfimation
                 };
 
+                jQuery.support.cors = true;
+
                 $.ajax({
                     type: 'POST',
-//                    dataType: 'json',
+                    dataType: 'json',
+                    crossDomain: true,
                     url: appSettings.websiteUrl + registerUrl,
                     data: input,
                     success: function (data) {

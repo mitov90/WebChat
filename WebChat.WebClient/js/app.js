@@ -10,7 +10,8 @@
             'mustache': 'libs/mustache',
             'sammy.mustache': 'libs/sammy.mustache',
             'appSettings': 'settings',
-            'User': 'scripts/user'
+            'User': 'scripts/user',
+            'File': 'scripts/file'
         },
         shim: {
             jquery: {
@@ -24,18 +25,41 @@
         }
     });
 
-    require(['jquery', 'sammy', 'mustache', 'sammy.mustache', 'User'], function ($, Sammy, Mustache, SammyMustache, User) {
+    require(['jquery', 'sammy', 'mustache', 'sammy.mustache', 'User', 'File'], function ($, Sammy, Mustache, SammyMustache, User, File) {
         Sammy('#main-container', function () {
             this.use(SammyMustache, 'mustache');
+
+            $('#popup-container').hide();
 
             this.get('#/home', function () {
                 this.partial('js/templates/main/welcome.mustache');
             });
 
-            this.get('#/login', function () {
+            this.get('#/chat-home', function () {
+                this.partial('js/templates/main/chat-home.mustache');
+            });
+
+            this.get('#/upload', function () {
                 var sammyObj = this;
                 var redirectAction = function(){
 //                    sammyObj.redirect('#/login');
+                };
+                var uploadFormEvents = function () {
+                    var $uploadButton = $('#upload-file-button');
+                    $uploadButton.off();
+                    $uploadButton.click(function () {
+                        var file = $('#file').get(0).files;
+                        File.uploadFile(file, redirectAction);
+                    });
+                };
+                this.partial('js/templates/main/upload-test.mustache', {}, uploadFormEvents);
+            });
+
+            this.get('#/login', function () {
+                var sammyObj = this;
+                var redirectAction = function(){
+                    console.log(sammyObj);
+                    sammyObj.redirect('#/chat-home');
                 };
                 var loginFormEvents = function () {
                     var $registerButton = $('#login-button');
@@ -102,7 +126,7 @@
         Sammy('#side-navigation', function () {
             this.use(SammyMustache, 'mustache');
 
-            this.get('#/home', function () {
+            this.get('#/chat-home', function () {
                 this.partial('js/templates/sidebar/side-navigation.mustache');
             });
 
