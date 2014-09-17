@@ -11,13 +11,17 @@
             'sammy.mustache': 'libs/sammy.mustache',
             'appSettings': 'settings',
             'User': 'scripts/user',
-            'File': 'scripts/file'
+            'File': 'scripts/file',
+            'PubNub': 'libs/pubnub.min'
         },
         shim: {
             jquery: {
                 exports: '$'
             },
-            'jqueryStorageApi': ['jquery']
+            'jqueryStorageApi': ['jquery'],
+            'PubNub' :{
+                exports: "PUBNUB"
+            }
 //            "jqueryStorageApi": {
 //                deps: ["jquery"],
 //                exports: "jQuery.fn.localStorage"
@@ -25,11 +29,13 @@
         }
     });
 
-    require(['jquery', 'sammy', 'mustache', 'sammy.mustache', 'User', 'File'], function ($, Sammy, Mustache, SammyMustache, User, File) {
+    require(['jquery', 'sammy', 'mustache', 'sammy.mustache', 'User', 'File','PubNub','appSettings'], function ($, Sammy, Mustache, SammyMustache, User, File, PubNub, appSettings) {
+
         Sammy('#main-container', function () {
             this.use(SammyMustache, 'mustache');
 
             $('#popup-container').hide();
+
 
             this.get('#/home', function () {
                 this.partial('js/templates/main/welcome.mustache');
@@ -60,6 +66,19 @@
                 var redirectAction = function(){
                     console.log(sammyObj);
                     sammyObj.redirect('#/chat-home');
+                    var pubnub = PubNub.init(
+                        {
+                            subscribe_key : appSettings.pubnubSubscribeKey,
+                            publish_key : 'pub-c-6576e5b7-0139-4662-a73b-50c3d7339d4d'
+                        }
+                    );
+                    pubnub.subscribe(
+                        {
+                            channel : 'test@test.tst',
+                            message : function(m){alert(m);},
+                            connect : function () {pubnub.publish({channel: "test@test.tst",message :"hi"})}
+                        }
+                    )
                 };
                 var loginFormEvents = function () {
                     var $registerButton = $('#login-button');
