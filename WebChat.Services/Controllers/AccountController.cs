@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Http;
+    using System.Web.Http.Cors;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -20,7 +21,6 @@
     using WebChat.Services.Models;
     using WebChat.Services.Providers;
     using WebChat.Services.Results;
-    using System.Web.Http.Cors;
 
     [Authorize]
     [RoutePrefix("api/Account")]
