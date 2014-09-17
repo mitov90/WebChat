@@ -1,7 +1,11 @@
 ﻿namespace WebChat.Services.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Web;
     using System.Web.Http;
     using System.Web.Http.Cors;
 
@@ -10,15 +14,14 @@
     using WebChat.Services.Helpers;
     using WebChat.Services.ViewModels;
 
-    [Authorize]
+    //[Authorize]
     [EnableCors("*", "*", "*")]
     public class ChatController : BaseApiController
     {
         // GET api/values
         public ChatController(IUserIdProvider userProvider, IWebChatData data)
             : base(userProvider, data)
-        {
-        }
+        {}
 
         [HttpGet]
         public IQueryable<ViewUser> GetAllUsers()
@@ -65,18 +68,36 @@
         }
 
         // POST api/values
-        public void Post([FromBody] string value)
+        public HttpResponseMessage Post()
         {
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filePath = HttpContext.Current.Server.MapPath("~/" + postedFile.FileName);
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
         }
 
         // PUT api/values/5
         public void Put(int id, [FromBody] string value)
-        {
-        }
+        {}
 
         // DELETE api/values/5
         public void Delete(int id)
-        {
-        }
+        {}
     }
 }
