@@ -3,7 +3,7 @@
 
     define(function () {
         return{
-            'websiteUrl': 'http://localhost:3178'
+            'websiteUrl': 'http://localhost:3177'
         };
     });
 }());
