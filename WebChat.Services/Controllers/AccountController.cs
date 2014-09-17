@@ -8,7 +8,6 @@
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Http;
-    using System.Web.Http.Cors;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -24,7 +23,6 @@
 
     [Authorize]
     [RoutePrefix("api/Account")]
-    [EnableCors("*", "*", "*")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
@@ -32,8 +30,7 @@
         private ApplicationUserManager _userManager;
 
         public AccountController()
-        {
-        }
+        {}
 
         public AccountController(
             ApplicationUserManager userManager, 
@@ -45,15 +42,8 @@
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return this._userManager ?? this.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-
-            private set
-            {
-                this._userManager = value;
-            }
+            get { return this._userManager ?? this.Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { this._userManager = value; }
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
@@ -97,17 +87,20 @@
             foreach (IdentityUserLogin linkedAccount in user.Logins)
             {
                 logins.Add(
-                    new UserLoginInfoViewModel
-                        {
-                            LoginProvider = linkedAccount.LoginProvider, 
-                            ProviderKey = linkedAccount.ProviderKey
-                        });
+                           new UserLoginInfoViewModel
+                               {
+                                   LoginProvider = linkedAccount.LoginProvider, 
+                                   ProviderKey = linkedAccount.ProviderKey
+                               });
             }
 
             if (user.PasswordHash != null)
             {
                 logins.Add(
-                    new UserLoginInfoViewModel { LoginProvider = LocalLoginProvider, ProviderKey = user.UserName, });
+                           new UserLoginInfoViewModel
+                               {
+                                  LoginProvider = LocalLoginProvider, ProviderKey = user.UserName, 
+                               });
             }
 
             return new ManageInfoViewModel
@@ -131,9 +124,9 @@
             IdentityResult result =
                 await
                 this.UserManager.ChangePasswordAsync(
-                    this.User.Identity.GetUserId(), 
-                    model.OldPassword, 
-                    model.NewPassword);
+                                                     this.User.Identity.GetUserId(), 
+                                                     model.OldPassword, 
+                                                     model.NewPassword);
 
             if (!result.Succeeded)
             {
@@ -193,8 +186,8 @@
             IdentityResult result =
                 await
                 this.UserManager.AddLoginAsync(
-                    this.User.Identity.GetUserId(), 
-                    new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
+                                               this.User.Identity.GetUserId(), 
+                                               new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
 
             if (!result.Succeeded)
             {
@@ -224,8 +217,8 @@
                 result =
                     await
                     this.UserManager.RemoveLoginAsync(
-                        this.User.Identity.GetUserId(), 
-                        new UserLoginInfo(model.LoginProvider, model.ProviderKey));
+                                                      this.User.Identity.GetUserId(), 
+                                                      new UserLoginInfo(model.LoginProvider, model.ProviderKey));
             }
 
             if (!result.Succeeded)
@@ -307,8 +300,8 @@
 
             if (generateState)
             {
-                const int strengthInBits = 256;
-                state = RandomOAuthStateGenerator.Generate(strengthInBits);
+                const int StrengthInBits = 256;
+                state = RandomOAuthStateGenerator.Generate(StrengthInBits);
             }
             else
             {
@@ -322,20 +315,20 @@
                                                        Name = description.Caption, 
                                                        Url =
                                                            this.Url.Route(
-                                                               "ExternalLogin", 
-                                                               new
-                                                                   {
-                                                                       provider =
-                                                           description.AuthenticationType, 
-                                                                       response_type = "token", 
-                                                                       client_id =
-                                                           Startup.PublicClientId, 
-                                                                       redirect_uri =
-                                                           new Uri(
-                                                           this.Request.RequestUri, 
-                                                           returnUrl).AbsoluteUri, 
-                                                                       state
-                                                                   }), 
+                                                                          "ExternalLogin", 
+                                                                          new
+                                                                              {
+                                                                                  provider =
+                                                                              description.AuthenticationType, 
+                                                                                  response_type = "token", 
+                                                                                  client_id =
+                                                                              Startup.PublicClientId, 
+                                                                                  redirect_uri =
+                                                                              new Uri(
+                                                                              this.Request.RequestUri, 
+                                                                              returnUrl).AbsoluteUri, 
+                                                                                  state
+                                                                              }), 
                                                        State = state
                                                    };
                 logins.Add(login);
@@ -412,13 +405,7 @@
 
         #region Helpers
 
-        private IAuthenticationManager Authentication
-        {
-            get
-            {
-                return this.Request.GetOwinContext().Authentication;
-            }
-        }
+        private IAuthenticationManager Authentication { get { return this.Request.GetOwinContext().Authentication; } }
 
         private IHttpActionResult GetErrorResult(IdentityResult result)
         {

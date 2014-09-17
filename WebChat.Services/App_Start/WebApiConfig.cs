@@ -5,13 +5,12 @@
 
     using Microsoft.Owin.Security.OAuth;
 
+    using Newtonsoft.Json;
+
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
-            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(cors);
-
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
@@ -21,6 +20,10 @@
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
+
+            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling =
+                PreserveReferencesHandling.None;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }
