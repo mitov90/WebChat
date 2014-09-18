@@ -8,8 +8,8 @@
     using System.Web;
     using System.Web.Http;
     using System.Web.Http.Cors;
-
     using WebChat.Data;
+    using WebChat.Dropbox;
     using WebChat.Models;
     using WebChat.Services.Helpers;
     using WebChat.Services.ViewModels;
@@ -68,6 +68,24 @@
         }
 
         [HttpPost]
+        public IHttpActionResult UploadFile()
+        {
+            if (HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                var file = HttpContext.Current.Request.Files[0];
+                var fileInputStream = file.InputStream;
+                byte[] fileAsArray = new byte[file.ContentLength];
+
+                fileInputStream.Read(fileAsArray, 0, file.ContentLength);
+
+                string fileUrl = DropboxUploader.Instance.UploadFileToDropbox(fileAsArray, file.FileName);
+                
+            }
+
+            return this.Ok();
+        }
+
+        [HttpPost]
         public IHttpActionResult PostMessage(Message message)
         {
             if (ModelState.IsValid)
@@ -80,7 +98,7 @@
                 this.Data.SaveChanges();
             }
             
-            return this.Ok(message);
+            return this.Ok();
         }
 
         // POST api/values
