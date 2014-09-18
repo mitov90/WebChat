@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using System.ComponentModel.DataAnnotations.Schema;
     using WebChat.Models.Enums;
 
     public class File
@@ -15,6 +16,7 @@
         [Required]
         public string Link { get; set; }
 
+        [ForeignKey("Message")]
         public int MessageId { get; set; }
 
         public virtual Message Message { get; set; }
