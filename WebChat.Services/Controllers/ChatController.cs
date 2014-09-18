@@ -11,6 +11,7 @@
     using WebChat.Data;
     using WebChat.Dropbox;
     using WebChat.Models;
+    using WebChat.NotificationManager;
     using WebChat.Services.Helpers;
     using WebChat.Services.ViewModels;
 
@@ -22,7 +23,7 @@
         public ChatController(IUserIdProvider userProvider, IWebChatData data)
             : base(userProvider, data)
         {}
-
+/*
         [HttpGet]
         public IQueryable<ViewUser> GetAllUsers()
         {
@@ -49,7 +50,7 @@
         }
 
         [HttpGet]
-        public IHttpActionResult GeMessages(string id)
+        public IHttpActionResult GetMessages(string id)
         {
             Guid guid;
 
@@ -65,8 +66,13 @@
             }
 
             return this.Ok(user.ReceivedMessages.Union(user.SentMessages));
+        }*/
+        [HttpGet]
+        public IHttpActionResult GetMessages()
+        {            
+            return this.Ok(this.Data.Messages.All());
         }
-
+        /*
         [HttpPost]
         public IHttpActionResult UploadFile()
         {
@@ -85,22 +91,27 @@
             return this.Ok();
         }
 
+         */
         [HttpPost]
         public IHttpActionResult PostMessage(Message message)
         {
             if (ModelState.IsValid)
             {
                 message.PostOn = DateTime.Now;
+                //message.UserId= this.Data.Users.All().Single(x => x.Email == message.User.Email).Id;
                 message.UserId = this.UserProvider.GetUserId();
                 
                 // TODO file attachmentss
                 this.Data.Messages.Add(message);
                 this.Data.SaveChanges();
             }
-            
+
+            var notification = PubNubNotificationManager.Instance;
+            notification.PublishMessage("global", "new message");
             return this.Ok();
         }
 
+        /*
         // POST api/values
         [HttpPost]
         public HttpResponseMessage Post()
@@ -129,5 +140,6 @@
 
             return result;
         }
+         */
     }
 }

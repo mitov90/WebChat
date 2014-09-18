@@ -43,8 +43,7 @@
             });
 
             this.get('#/chat-home', function () {
-                this.partial('js/templates/main/chat-home.mustache');
-                Chat.init();
+                this.partial('js/templates/main/chat-home.mustache',Chat.init);
             });
 
             this.get('#/upload', function () {

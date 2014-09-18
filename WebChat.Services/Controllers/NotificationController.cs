@@ -11,6 +11,7 @@
 
     using WebChat.Data;
     using WebChat.Models;
+    using WebChat.NotificationManager;
     using WebChat.Services.Helpers;
     using WebChat.Services.ViewModels;
 
@@ -18,26 +19,27 @@
     [EnableCors("*", "*", "*")]
     public class NotificationController : BaseApiController
     {
-        private const string NotificationSubscribeKey = "sub-c-34433516-3e64-11e4-8c81-02ee2ddab7fe";
-        private const string NotificationPublishKey = "pub-c-6576e5b7-0139-4662-a73b-50c3d7339d4d";
+        private INotificationManager notificationManager;
 
         // GET api/values
         public NotificationController(IUserIdProvider userProvider, IWebChatData data)
             : base(userProvider, data)
-        {}
+        {
+            this.notificationManager = PubNubNotificationManager.Instance;
+        }
 
         [HttpGet]
         public IHttpActionResult GetSubscribeKey()
         {
-            return this.Ok(NotificationSubscribeKey);            
+            return this.Ok(this.notificationManager.SubscribeKey);            
         }
 
         // This should be removed. Used only for testing. In the final version only the web service should have the publish key, not the clients.
-        [HttpGet]
+        /*[HttpGet]
         public IHttpActionResult GetPublishKey()
         {
-            return this.Ok(NotificationPublishKey);            
-        }
+            return this.Ok(this.notificationManager.PublishKey);            
+        }*/
 
     }
 }

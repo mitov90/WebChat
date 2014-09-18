@@ -343,6 +343,10 @@
       <Project>{A0BEA21F-B3CF-497C-9C55-5059DA3A491D}</Project>
       <Name>WebChat.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebChat.NotificationManager\WebChat.NotificationManager.csproj">
+      <Project>{E3C30DB3-92E7-49A4-A6AE-B2297D4A732C}</Project>
+      <Name>WebChat.NotificationManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
