@@ -67,6 +67,22 @@
             return this.Ok(user.ReceivedMessages.Union(user.SentMessages));
         }
 
+        [HttpPost]
+        public IHttpActionResult PostMessage(Message message)
+        {
+            if (ModelState.IsValid)
+            {
+                message.PostOn = DateTime.Now;
+                message.UserId = this.UserProvider.GetUserId();
+                
+                // TODO file attachmentss
+                this.Data.Messages.Add(message);
+                this.Data.SaveChanges();
+            }
+            
+            return this.Ok(message);
+        }
+
         // POST api/values
         [HttpPost]
         public HttpResponseMessage Post()
@@ -95,13 +111,5 @@
 
             return result;
         }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
-        {}
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {}
     }
 }
