@@ -15,16 +15,6 @@
 
         public int? FileId { get; set; }
 
-        [ForeignKey("Sender")]
-        public string SenderId { get; set; }
-
-        [ForeignKey("Receiver")]
-        public string ReceiverId { get; set; }
-
-        [ForeignKey("SenderId")]
-        public virtual User Sender { get; set; }
-
-        [ForeignKey("ReceiverId")]
-        public virtual User Receiver { get; set; }
+        public virtual ChatRoom ChatRoom { get; set; }
     }
 }

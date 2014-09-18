@@ -21,6 +21,8 @@
 
         public IDbSet<Message> Messages { get; set; }
 
+        public IDbSet<ChatRoom> ChatRooms { get; set; }
+
         public static WebChatDbContext Create()
         {
             return new WebChatDbContext();

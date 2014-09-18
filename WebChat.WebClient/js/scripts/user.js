@@ -6,6 +6,9 @@
             var registerUrl = '/api/Account/Register';
             var loginUrl = '/Token';
             var $storage = $.localStorage;
+            var userData = {
+                userId: null
+            };
 
             var login = function (email, password, success) {
                 var input = {
@@ -44,9 +47,19 @@
                 return false;
             };
 
-            var sessionToken = function () {
+            var getSessionToken = function () {
                 if (isLogged() === true && $storage.isSet('sessionToken')) {
                     return $storage.get('sessionToken');
+                }
+
+                throw new Error('User is not logged!');
+            };
+
+            var getUserId = function () {
+                if (isLogged() === true) {
+                    if (userData.userId === null) {
+                        userData.userId
+                    }
                 }
 
                 throw new Error('User is not logged!');
@@ -68,7 +81,7 @@
                     url: appSettings.websiteUrl + registerUrl,
                     data: input,
                     success: function (data) {
-
+                        success(email, password);
                     },
                     error: function (err) {
 
@@ -82,7 +95,8 @@
 
             return{
                 register: register,
-                login: login
+                login: login,
+                getSessionToken: getSessionToken
             };
         }());
 

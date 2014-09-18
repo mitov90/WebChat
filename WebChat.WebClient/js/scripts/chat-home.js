@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    define(['appSettings', 'jquery', 'PubNub','jqueryStorageApi'], function (appSettings, $,PubNub, jqueryStorageApi) {
+    define(['appSettings', 'jquery', 'PubNub','jqueryStorageApi', 'User'], function (appSettings, $,PubNub, jqueryStorageApi, User) {
         var globalChat = (function () {
             var subscribeKeyUrl = '/api/Notification/GetSubscribeKey';
             var publishKeyUrl = '/api/Notification/GetPublishKey';
@@ -44,7 +44,7 @@
                         message : function(m){alert(m);},
                         connect : function () {notificationManager.publish({channel: $storage.get('email'), message :"User Notification Test"})}
                     }
-                )
+                );
 
                 notificationManager.subscribe(
                     {
@@ -53,7 +53,7 @@
                         connect : function () {notificationManager.publish({channel: 'global', message :"Global Channel notification"})}
                     }
                 )
-            }
+            };
 
             return{
                 init: init

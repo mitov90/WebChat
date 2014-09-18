@@ -13,6 +13,8 @@
 
         IRepository<Interest> Interests { get; }
 
+        IRepository<ChatRoom> ChatRooms { get; }
+
         int SaveChanges();
     }
 }

@@ -50,6 +50,14 @@
             }
         }
 
+        public IRepository<ChatRoom> ChatRooms
+        {
+            get
+            {
+                return this.GetRepository<ChatRoom>();
+            }
+        }
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();

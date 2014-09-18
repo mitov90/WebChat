@@ -85,7 +85,10 @@
             this.get('#/register', function () {
                 var sammyObj = this;
                 var redirectAction = function(){
-                    sammyObj.redirect('#/login');
+                    sammyObj.redirect('#/chat-home');
+                };
+                var loginAction = function(email, password){
+                    User.login(email, password, redirectAction);
                 };
                 var registerFormEvents = function () {
                     var $registerButton = $('#register-button');
@@ -94,7 +97,7 @@
                         var email = $('#email').val();
                         var password = $('#password').val();
                         var confimationPassword = $('#password-confirm').val();
-                        User.register(email, password, confimationPassword, redirectAction);
+                        User.register(email, password, confimationPassword, loginAction);
                     });
                 };
 

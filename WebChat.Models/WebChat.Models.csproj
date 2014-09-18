@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatRoom.cs" />
     <Compile Include="Enums\Sex.cs" />
     <Compile Include="File.cs" />
     <Compile Include="Enums\FileType.cs" />
