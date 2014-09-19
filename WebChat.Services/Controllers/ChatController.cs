@@ -15,7 +15,7 @@
     using WebChat.Services.Helpers;
     using WebChat.Services.ViewModels;
 
-    //[Authorize]
+    [Authorize]
     [EnableCors("*", "*", "*")]
     public class ChatController : BaseApiController
     {
@@ -72,7 +72,7 @@
         {            
             return this.Ok(this.Data.Messages.All());
         }
-        /*
+        
         [HttpPost]
         public IHttpActionResult UploadFile()
         {
@@ -85,61 +85,37 @@
                 fileInputStream.Read(fileAsArray, 0, file.ContentLength);
 
                 string fileUrl = DropboxUploader.Instance.UploadFileToDropbox(fileAsArray, file.FileName);
-                
+
+                return this.Ok(fileUrl);
             }
-
-            return this.Ok();
+            else
+            {
+                return this.BadRequest("File attachment missing.");
+            }
         }
-
-         */
+         
         [HttpPost]
         public IHttpActionResult PostMessage(Message message)
         {
             if (ModelState.IsValid)
             {
                 message.PostOn = DateTime.Now;
-                //message.UserId= this.Data.Users.All().Single(x => x.Email == message.User.Email).Id;
-                message.UserId = this.UserProvider.GetUserId();
+                message.UserId = this.UserProvider.GetUserId();                
                 
-                // TODO file attachmentss
                 this.Data.Messages.Add(message);
                 this.Data.SaveChanges();
             }
 
             var notification = PubNubNotificationManager.Instance;
             notification.PublishMessage("global", "new message");
-            return this.Ok();
-        }
 
-        /*
-        // POST api/values
-        [HttpPost]
-        public HttpResponseMessage Post()
-        {
-            HttpResponseMessage result = null;
-            var httpRequest = HttpContext.Current.Request;
-            var files = httpRequest.Files;
-            if (httpRequest.Files.Count > 0)
+            var messageData = new MessageDataModel()
             {
-                var docfiles = new List<string>();
-                foreach (string file in httpRequest.Files)
-                {
-                    var postedFile = httpRequest.Files[file];
-                    var filePath = HttpContext.Current.Server.MapPath("~/" + postedFile.FileName);
-                    postedFile.SaveAs(filePath);
+                Body = message.Body,
+                PostOn = message.PostOn
+            };
 
-                    docfiles.Add(filePath);
-                }
-
-                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
-            }
-            else
-            {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
-
-            return result;
+            return this.Ok(messageData);
         }
-         */
     }
 }

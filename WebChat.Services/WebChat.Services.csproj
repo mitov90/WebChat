@@ -272,6 +272,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\MessageDataModel.cs" />
     <Compile Include="ViewModels\ViewUser.cs" />
   </ItemGroup>
   <ItemGroup>
