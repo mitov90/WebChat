@@ -162,6 +162,12 @@
                         $('#upload-file-cancel-button').click(function () {
                             sammyObj.redirect('#/chat-home/:show-chat/')
                         });
+
+                        $('#upload-file-button').click(function () {
+                            File.uploadFile($('#file'), function(fileUrl) {
+                                console.log(fileUrl);
+                            });
+                        });
                     };
                     sammyObj.partial('js/templates/popup/file-upload.mustache', {}, callbackAction);
                 }

@@ -15,7 +15,7 @@
     using WebChat.Services.Helpers;
     using WebChat.Services.ViewModels;
 
-    [Authorize]
+    //[Authorize]
     [EnableCors("*", "*", "*")]
     public class ChatController : BaseApiController
     {
@@ -74,6 +74,7 @@
         }
         
         [HttpPost]
+        [Route("api/chat/uploadfile")]
         public IHttpActionResult UploadFile()
         {
             if (HttpContext.Current.Request.Files.AllKeys.Any())
@@ -85,7 +86,7 @@
                 fileInputStream.Read(fileAsArray, 0, file.ContentLength);
 
                 string fileUrl = DropboxUploader.Instance.UploadFileToDropbox(fileAsArray, file.FileName);
-
+                
                 return this.Ok(fileUrl);
             }
             else
