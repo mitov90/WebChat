@@ -21,7 +21,7 @@
                         notificationManager = PubNub.init(
                             {
                                 subscribe_key : data
-                            })
+                            });
                         $("#send-message-button").on("click",sendMessage);
                     },
                     async: false
@@ -41,7 +41,8 @@
                         message : function(m){if(m=='new message'){updateMessages();}}
                         //connect : function () {notificationManager.publish({channel: 'global', message :"Global Channel notification"})}
                     }
-                )
+                );
+
                 updateMessages();
             };
 
